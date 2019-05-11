@@ -12,11 +12,11 @@ AddEventHandler("vf_phone:setup", function(phone)
             Wait(1000)
             _PlayerListScreen.ClearItems()
             for i = 0, 64 do
-                if NetworkIsPlayerConnected(i) and i ~= PlayerId() then
+                if NetworkIsPlayerConnected(i) and (IsDebug or i ~= PlayerId()) then
                     local playerName = GetPlayerName(i)
                     local playerOptionsMenu = _App.CreateListScreen(playerName)
                     _PlayerListScreen.AddScreenItem(playerName, 0, playerOptionsMenu)
-                    playerOptionsMenu.AddCallbackItem("Send Message", 0, function()
+                    playerOptionsMenu.AddCallbackItem(GetLabelText("collision_uy2q01"), 0, function()
                         Wait(0) -- Stop from instantly confirming message
                         DisplayOnscreenKeyboard(6, "FMMC_KEY_TIP8", "", "", "", "", "", 60)
                         while UpdateOnscreenKeyboard() ~= 1 and UpdateOnscreenKeyboard() ~= 2 do
